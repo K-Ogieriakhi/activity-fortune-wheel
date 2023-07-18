@@ -1,0 +1,53 @@
+<div class="priceLevel-container">
+  <p>Price level:</p>
+  <div *ngFor="let priceLevel of availablePriceLevels" class="priceLevel-item">
+    <input
+      #inputEl
+      type="checkbox"
+      [disabled]="isSpinning"
+      [value]="priceLevel"
+      [checked]="selectedPriceLevels.includes(priceLevel)"
+      (change)="changeSelectedPriceLevel(inputEl.checked, priceLevel)"
+      class="form-check-input"
+      id="check2"
+      name="option2"
+      value="something"
+    />
+    <label class="form-check-label">{{ priceLevel }}</label>
+  </div>
+</div>
+
+<!-- Display message if no price level was selected -->
+<ng-container *ngIf="selectedPriceLevels.length === 0">
+  <ng-container *ngTemplateOutlet="NoPriceLevelSelected"></ng-container>
+</ng-container>
+
+<!-- Render available tickets -->
+<ng-container *ngIf="tickets.length > 0">
+  <ng-container *ngTemplateOutlet="ticketDrum"></ng-container>
+</ng-container>
+
+<!-- Spin Button -->
+<div class="Buttons">
+  <button [disabled]="isSpinning" (click)="spin()">Spin</button>
+</div>
+
+<!-- Templates -->
+<ng-template #NoPriceLevelSelected>
+  <div class="empty-message-container">
+    <p>Bitte wähle mindestens ein Price level aus!</p>
+  </div>
+</ng-template>
+
+<ng-template #ticketDrum>
+  <div #ticketContainer class="ticket-container">
+    <div class="goalLine">|</div>
+    <div class="ticket" *ngFor="let ticket of tickets; trackBy: trackByIndex">
+      <app-raffle-ticket
+        [ngStyle]="{ transform: 'rotateZ(40deg) ' }"
+        [ticket]="ticket"
+      >
+      </app-raffle-ticket>
+    </div>
+  </div>
+</ng-template>

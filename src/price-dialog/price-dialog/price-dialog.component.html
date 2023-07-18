@@ -1,0 +1,10 @@
+<div class="result-container">
+  <h2>Glückwunsch folgende Aktivität wurde ausgelost</h2>
+  <h3>{{ selectedTicket.text }}</h3>
+
+  <p>
+    Wahrscheinlichkeit:
+    {{ selectedTicket.propability * 100 | number: '1.2-2' }}%
+  </p>
+</div>
+<button (click)="dialogRef.close()">Zurück zur Übersicht</button>

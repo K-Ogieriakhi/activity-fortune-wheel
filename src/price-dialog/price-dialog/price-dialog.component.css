@@ -1,0 +1,23 @@
+.result-container {
+  color: white;
+  text-align: center;
+}
+:host {
+  display: block;
+  background-color: #2a2d2e;
+  border: 1px solid #ffbf00;
+  margin-top: 48px;
+  border-radius: 4px;
+  padding: 8px 16px 16px;
+  animation: custom-dialog-enter 3s ease;
+}
+
+@keyframes custom-dialog-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

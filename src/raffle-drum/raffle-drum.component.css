@@ -1,0 +1,70 @@
+.ticket-container {
+  display: flex;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.empty-message-container {
+  display: flex;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  justify-content: center;
+  color: red;
+  font-weight: bold;
+}
+
+.priceLevel-container {
+  display: flex;
+  color: white;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+.priceLevel-item {
+  margin-left: 16px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ticket {
+  height: 250px;
+  width: 250px;
+  background-color: #2a2d2e;
+  border: 1px solid black;
+  position: relative;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.goalLine {
+  position: sticky;
+  top: 0;
+  left: 50%;
+  background: #ffbf00;
+  bottom: 0;
+  color: #ffbf00;
+  border: 1px solid #6a5d35;
+  right: 50%;
+  width: 2px;
+  z-index: 10;
+}
+.overlay {
+  width: 100%;
+  z-index: 0;
+  background-color: #000;
+  height: 100%;
+  opacity: 0.3;
+}

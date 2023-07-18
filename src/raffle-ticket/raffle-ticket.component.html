@@ -1,0 +1,14 @@
+<div
+  class="toc"
+  [ngStyle]="{
+    transform: 'rotateZ(45)',
+    'background-image': getBackgroundImageTOC()
+  }"
+>
+  <div
+    class="toc-background"
+    [ngStyle]="{ 'background-image': getBackgroundImageTOCBC() }"
+  >
+    <span class="text">{{ ticket.text }}</span>
+  </div>
+</div>

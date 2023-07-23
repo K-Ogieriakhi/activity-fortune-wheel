@@ -140,7 +140,7 @@ export class RaffleDrumComponent implements OnInit {
             text: activity.text,
             priceLevel: activity.priceLevel,
             propability: activity.tickets / availableTickets,
-            id: this.tickets.length + 1,
+            position: this.tickets.length + 1,
           };
           this.tickets.push(ticket);
         }
@@ -178,7 +178,7 @@ export class RaffleDrumComponent implements OnInit {
         Math.floor((Math.random() * Ticket_Width) / 2) * negative;
 
       var newDistance =
-        Ticket_Width * this.selectedTicket.id +
+        Ticket_Width * this.selectedTicket.position +
         Ticket_Width / 2 -
         ticketContainerWidth / 2 +
         randonOffsetinTicket;
@@ -222,6 +222,6 @@ export class RaffleDrumComponent implements OnInit {
   }
 
   public trackByIndex(_index: number, ticket: Ticket) {
-    return ticket.id;
+    return ticket.position;
   }
 }

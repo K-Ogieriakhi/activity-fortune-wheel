@@ -28,8 +28,8 @@ export function shuffle(a: Array<any>) {
     j = Math.floor(Math.random() * (i + 1));
     x = a[i];
     // swap id's (position)
-    x.id = j;
-    a[j].id = i;
+    x.position = j;
+    a[j].position = i;
     // swap positions
     a[i] = a[j];
     a[j] = x;

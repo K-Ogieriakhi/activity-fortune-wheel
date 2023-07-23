@@ -1,4 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
 @import '~@angular/cdk/overlay-prebuilt.css';
+html,body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 /* Add application styles & imports to this file! */
 body {
   background-color: rgb(33, 33, 33);
@@ -22,10 +30,14 @@ h1 {
 .cdk-global-overlay-wrapper {
   justify-content: center;
 }
+input[type="checkbox"] {
+    cursor: pointer;
+}
 
 button {
+  cursor: pointer;
   width: calc(100% - 32px);
-  color: #fff;
+  color: #000;
   background-color: #ffbf00;
   border-color: #c4970d;
   margin: 32px 16px;

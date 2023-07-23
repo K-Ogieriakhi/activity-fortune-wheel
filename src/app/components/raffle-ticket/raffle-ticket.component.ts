@@ -1,27 +1,31 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { Ticket } from '../models/ticket.model';
+import { Component, Input } from '@angular/core';
+import { Ticket } from 'src/app/models/ticket.model';
 
 @Component({
   selector: 'app-raffle-ticket',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './raffle-ticket.component.html',
-  styleUrls: ['./raffle-ticket.component.css'],
+  styleUrls: ['./raffle-ticket.component.scss'],
 })
-export class RaffleTicketComponent implements OnInit {
+export class RaffleTicketComponent {
   colors: string[] = ['#af7150', '#69c4bd', '#d2d1bd', '#ffd55d'];
-  @Input() ticket: Ticket;
-
-  color = this.colors[Math.floor(Math.random() * 4) + 0];
-  constructor() {}
-
-  ngOnInit() {
-    this.setColorBasedOnPriceLevel();
+  private _ticket!: Ticket;
+  @Input() set ticket(value: Ticket) {
+    this._ticket = value;
+    if (this._ticket) {
+      this.setColorBasedOnPriceLevel();
+    }
   }
 
+  get ticket(): Ticket {
+    return this._ticket;
+  }
+
+  color = this.colors[Math.floor(Math.random() * 4) + 0];
+
   setColorBasedOnPriceLevel() {
-    if (this.ticket.priceLevel.includes('High')) {
+    if (this.ticket.text.includes('Niete')) {
+      this.color = '#e13d2d';
+    } else if (this.ticket.priceLevel.includes('High')) {
       this.color = this.colors[3];
     } else if (this.ticket.priceLevel.includes('Medium')) {
       this.color = this.colors[2];

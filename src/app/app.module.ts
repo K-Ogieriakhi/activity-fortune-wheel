@@ -11,6 +11,8 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { UILoaderModule } from "./ui-loader.module";
 import { HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { HttpClientModule } from "@angular/common/http";
     DialogModule,
     FormsModule,
     HttpClientModule,
+    MatSortModule,
     UILoaderModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

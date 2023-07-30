@@ -64,12 +64,12 @@
 
 <ng-template #ticketTable>
   <div class="ticket-table">
-    <table>
+    <table  matSort (matSortChange)="sortData($event)">
       <tr>
-        <th>Unternehmung</th>
-        <th>Anzahl Tickets</th>
-        <th>Preis-Range</th>
-        <th>Wahrscheinlichkeit</th>
+        <th mat-sort-header="text">Unternehmung</th>
+        <th mat-sort-header="tickets">Anzahl Tickets</th>
+        <th mat-sort-header="priceLevel">Preis-Range</th>
+        <th mat-sort-header="probability">Wahrscheinlichkeit</th>
       </tr>
       <tr *ngFor="let activity of filteredActivities">
         <td>{{ activity.text }}</td>

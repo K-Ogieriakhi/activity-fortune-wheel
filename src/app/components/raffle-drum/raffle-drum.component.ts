@@ -16,6 +16,7 @@ import { findNestedArrayItemIndex, shuffle } from 'src/app/helper/functions';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { HttpClient } from '@angular/common/http';
 import { cloneDeep } from 'lodash-es';
+import { Sort } from '@angular/material/sort';
 
 export const LOAD_DATA_TASK_ID = 'LOAD_DATA';
 
@@ -223,7 +224,7 @@ export class RaffleDrumComponent implements OnInit {
     this.filterBasedOnPriceLevels();
   }
 
-  private updateActivityProbability(){
+  private updateActivityProbability() {
     const availableTickets = this.filteredActivities.reduce(
       (next = 0, activity) => {
         return next + activity.tickets;
@@ -231,12 +232,60 @@ export class RaffleDrumComponent implements OnInit {
       0
     );
 
-    this.filteredActivities.forEach((activity)=> {
-      activity.probability = activity.tickets / availableTickets
-    })
+    this.filteredActivities.forEach((activity) => {
+      activity.probability = activity.tickets / availableTickets;
+    });
   }
 
   public trackByIndex(_index: number, ticket: Ticket) {
     return ticket.position;
+  }
+  sortData(sort: Sort) {
+    const data = this.filteredActivities.slice();
+    if (!sort.active || sort.direction === '') {
+      this.filteredActivities = data;
+      return;
+    }
+
+    this.filteredActivities = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'text':
+          return compare(a.text, b.text, isAsc);
+        case 'tickets':
+          return compare(a.tickets, b.tickets, isAsc);
+        case 'priceLevel':
+          return compare(
+            priceLevelToNumber(a.priceLevel.toString()),
+            priceLevelToNumber(b.priceLevel.toString()),
+            isAsc
+          );
+        case 'probability':
+          return compare(a?.probability ?? 0, b?.probability ?? 0, isAsc);
+        default:
+          return 0;
+      }
+    });
+    this.cdRef.detectChanges();
+  }
+}
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
+
+function priceLevelToNumber(priceLevel: string): number {
+  if (priceLevel.includes('High') && priceLevel.includes('Medium')) {
+    return 3;
+  } else if (priceLevel.includes('Low') && priceLevel.includes('Medium')) {
+    return 1;
+  } else if (priceLevel.includes('High')) {
+    return 4;
+  } else if (priceLevel.includes('Medium')) {
+    return 2;
+  } else if (priceLevel.includes('Low')) {
+    return 0;
+  } else {
+    return 0;
   }
 }

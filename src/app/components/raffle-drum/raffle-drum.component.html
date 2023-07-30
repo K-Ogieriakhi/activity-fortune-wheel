@@ -71,11 +71,17 @@
         <th>Preis-Range</th>
         <th>Wahrscheinlichkeit</th>
       </tr>
-      <tr *ngFor="let ticket of tickets; trackBy: trackByIndex">
-        <td>{{ ticket.text }}</td>
-        <td>{{ ticket.ticketsInDrum }}</td>
-        <td>{{ ticket.priceLevel }}</td>
-        <td>{{ ticket.propability * 100 | number : '1.2-2' }}%</td>
+      <tr *ngFor="let activity of filteredActivities">
+        <td>{{ activity.text }}</td>
+        <td>{{ activity.tickets }}</td>
+        <td>{{ activity.priceLevel }}</td>
+        <td>
+          {{
+            activity?.probability
+              ? ((activity.probability ?? 0) * 100 | number : '1.2-2') + '%'
+              : '---'
+          }}
+        </td>
       </tr>
     </table>
   </div>

@@ -130,6 +130,7 @@ export class RaffleDrumComponent implements OnInit {
       },
       0
     );
+    this.updateActivityProbability();
 
     const minTicketFactor = Math.round(minTicketsInDrum / availableTickets);
     const maxFactor = 10;
@@ -139,7 +140,7 @@ export class RaffleDrumComponent implements OnInit {
           const ticket: Ticket = {
             text: activity.text,
             priceLevel: activity.priceLevel,
-            propability: activity.tickets / availableTickets,
+            probability: activity.tickets / availableTickets,
             position: this.tickets.length + 1,
             ticketsInDrum: activity.tickets,
           };
@@ -220,6 +221,19 @@ export class RaffleDrumComponent implements OnInit {
     }
 
     this.filterBasedOnPriceLevels();
+  }
+
+  private updateActivityProbability(){
+    const availableTickets = this.filteredActivities.reduce(
+      (next = 0, activity) => {
+        return next + activity.tickets;
+      },
+      0
+    );
+
+    this.filteredActivities.forEach((activity)=> {
+      activity.probability = activity.tickets / availableTickets
+    })
   }
 
   public trackByIndex(_index: number, ticket: Ticket) {

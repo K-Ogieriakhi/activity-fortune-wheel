@@ -1,38 +1,48 @@
-<div class="priceLevel-container">
-  <p>Price level:</p>
-  <div *ngFor="let priceLevel of availablePriceLevels" class="priceLevel-item">
-    <input
-      #inputEl
-      type="checkbox"
-      [disabled]="isSpinning"
-      [value]="priceLevel"
-      [checked]="selectedPriceLevels.includes(priceLevel)"
-      (change)="changeSelectedPriceLevel(inputEl.checked, priceLevel)"
-      class="form-check-input"
-      id="check2"
-      name="option2"
-      value="something"
-    />
-    <label class="form-check-label">{{ priceLevel }}</label>
+<div>
+  <div class="priceLevel-container">
+    <p>Price level:</p>
+    <div
+      *ngFor="let priceLevel of availablePriceLevels"
+      class="priceLevel-item"
+    >
+      <input
+        #inputEl
+        type="checkbox"
+        [disabled]="isSpinning"
+        [value]="priceLevel"
+        [checked]="selectedPriceLevels.includes(priceLevel)"
+        (change)="changeSelectedPriceLevel(inputEl.checked, priceLevel)"
+        class="form-check-input"
+        id="check2"
+        name="option2"
+        value="something"
+      />
+      <label class="form-check-label">{{ priceLevel }}</label>
+    </div>
+  </div>
+
+  <!-- Display message if no price level was selected -->
+  <ng-container *ngIf="selectedPriceLevels.length === 0">
+    <ng-container *ngTemplateOutlet="NoPriceLevelSelected"></ng-container>
+  </ng-container>
+
+  <!-- Render available tickets -->
+  <ng-container *ngIf="tickets.length > 0">
+    <ng-container *ngTemplateOutlet="ticketDrum"></ng-container>
+  </ng-container>
+
+  <!-- Spin Button -->
+  <div class="Buttons">
+    <button [disabled]="isSpinning" (click)="spin()">Spin</button>
   </div>
 </div>
 
-<!-- Display message if no price level was selected -->
-<ng-container *ngIf="selectedPriceLevels.length === 0">
-  <ng-container *ngTemplateOutlet="NoPriceLevelSelected"></ng-container>
-</ng-container>
-
 <!-- Render available tickets -->
 <ng-container *ngIf="tickets.length > 0">
-  <ng-container *ngTemplateOutlet="ticketDrum"></ng-container>
+  <ng-container *ngTemplateOutlet="ticketTable"></ng-container>
 </ng-container>
 
-<!-- Spin Button -->
-<div class="Buttons">
-  <button [disabled]="isSpinning" (click)="spin()">Spin</button>
-</div>
-
-<!-- Templates -->
+<!------------------------------------- Templates ------------------------------------------->
 <ng-template #NoPriceLevelSelected>
   <div class="empty-message-container">
     <p>Bitte wähle mindestens ein Price level aus!</p>
@@ -49,5 +59,24 @@
       >
       </app-raffle-ticket>
     </div>
+  </div>
+</ng-template>
+
+<ng-template #ticketTable>
+  <div class="ticket-table">
+    <table>
+      <tr>
+        <th>Unternehmung</th>
+        <th>Anzahl Tickets</th>
+        <th>Preis-Range</th>
+        <th>Wahrscheinlichkeit</th>
+      </tr>
+      <tr *ngFor="let ticket of tickets; trackBy: trackByIndex">
+        <td>{{ ticket.text }}</td>
+        <td>{{ ticket.ticketsInDrum }}</td>
+        <td>{{ ticket.priceLevel }}</td>
+        <td>{{ ticket.propability * 100 | number : '1.2-2' }}%</td>
+      </tr>
+    </table>
   </div>
 </ng-template>

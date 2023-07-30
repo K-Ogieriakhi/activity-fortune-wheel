@@ -141,6 +141,7 @@ export class RaffleDrumComponent implements OnInit {
             priceLevel: activity.priceLevel,
             propability: activity.tickets / availableTickets,
             position: this.tickets.length + 1,
+            ticketsInDrum: activity.tickets,
           };
           this.tickets.push(ticket);
         }

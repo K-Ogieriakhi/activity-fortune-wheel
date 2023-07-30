@@ -1,3 +1,11 @@
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 32px;
+}
+
 .ticket-container {
   display: flex;
   max-width: 100%;
@@ -68,4 +76,23 @@
   background-color: #000;
   height: 100%;
   opacity: 0.3;
+}
+
+.ticket-table {
+  overflow-y: scroll;
+  height: 300px;
+  border: 1px solid #dddddd;
+  table {
+    width: 100%;
+    color: white;
+    border-collapse: collapse;
+    overflow-y: scroll;
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+  }
 }

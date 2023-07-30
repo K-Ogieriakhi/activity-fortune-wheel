@@ -3,4 +3,5 @@ export interface Ticket {
   propability: number;
   priceLevel: Array<'Low' | 'Medium' | 'High'>;
   position: number; // unique
+  ticketsInDrum: number;
 }
